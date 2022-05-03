@@ -12,16 +12,7 @@ namespace SALESCAR.API.Controllers
     [Route("api/[controller]")]
     public class CarrosController : ControllerBase
     {
-
-        public CarrosController()
-        {
-            
-        }
-
-        [HttpGet]
-        public IEnumerable<Carro> Get()
-        {
-            return new Carro [] {
+        public IEnumerable<Carro> _carro = new Carro [] {
                 new Carro () {
                     CarroId = 1,
                     Descricao = "Palio",
@@ -47,6 +38,22 @@ namespace SALESCAR.API.Controllers
                     AnoModelo = "2010"
                 }
             };
+
+        public CarrosController()
+        {
+            
+        }
+
+        [HttpGet]
+        public IEnumerable<Carro> Get()
+        {
+            return _carro;
+        }
+
+        [HttpGet("{id}")]
+        public IEnumerable<Carro> GetById(int id)
+        {
+            return _carro.Where(carro => carro.CarroId == id);
         }
     }
 }
