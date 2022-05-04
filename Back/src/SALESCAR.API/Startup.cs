@@ -39,8 +39,8 @@ namespace SalesCar.API
             services.AddControllers();
 
             services.AddScoped<ICarroService, CarroService>();
-            services.AddScoped<IGeralPersist, SalesCarGeralPersistence>();
-            services.AddScoped<ICarroPersist, SalesCarCarroPersistence>();
+            services.AddScoped<IGeralPersist, GeralPersist>();
+            services.AddScoped<ICarroPersist, CarroPersist>();
 
             services.AddSwaggerGen(c =>
             {

@@ -8,11 +8,11 @@ using SalesCar.Persistence.Contratos;
 namespace SalesCar.Persistence
 {
     //GERAL
-    public class SalesCarCarroPersistence : ICarroPersist
+    public class CarroPersist : ICarroPersist
     {
         private readonly SalesCarContext _context;
 
-        public SalesCarCarroPersistence(SalesCarContext context)
+        public CarroPersist(SalesCarContext context)
         {
             _context = context;
             //_context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;

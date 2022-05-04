@@ -7,11 +7,11 @@ using SalesCar.Persistence.Contratos;
 
 namespace SalesCar.Persistence
 {
-    public class SalesCarGeralPersistence : IGeralPersist
+    public class GeralPersist : IGeralPersist
     {
         private readonly SalesCarContext _context;
 
-        public SalesCarGeralPersistence(SalesCarContext context)
+        public GeralPersist(SalesCarContext context)
         {
             _context = context;
 
