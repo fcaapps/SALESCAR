@@ -17,6 +17,7 @@ using SalesCar.Domain;
 using SalesCar.Domain.Contextos;
 using SalesCar.Persistence;
 using SalesCar.Persistence.Contratos;
+using AutoMapper;
 
 namespace SalesCar.API
 {
@@ -37,6 +38,8 @@ namespace SalesCar.API
                 context => context.UseSqlServer(Configuration.GetConnectionString("Default"))	
             );   
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICarroService, CarroService>();
             services.AddScoped<IGeralPersist, GeralPersist>();

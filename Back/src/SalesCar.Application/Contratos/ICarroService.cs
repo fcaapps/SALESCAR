@@ -1,15 +1,16 @@
 using System.Threading.Tasks;
+using SalesCar.Application.Dtos;
 using SalesCar.Domain;
 
 namespace SalesCar.Application
 {
     public interface ICarroService
     {
-        Task<Carro> AddCarro(Carro model);
-        Task<Carro> UpdateCarro(int carroId, Carro model);
+        Task<CarroDto> AddCarro(CarroDto model);
+        Task<CarroDto> UpdateCarro(int carroId, CarroDto model);
         Task<bool> DeleteCarro(int carroId);
-        Task<Carro[]> GetAllCarrosAsync();
-        Task<Carro[]> GetAllCarrosByDescricaoAsync(string descricao);
-        Task<Carro> GetCarrosByIdAsync(int carroId);
+        Task<CarroDto[]> GetAllCarrosAsync();
+        Task<CarroDto[]> GetAllCarrosByDescricaoAsync(string descricao);
+        Task<CarroDto> GetCarrosByIdAsync(int carroId);
     }
 }

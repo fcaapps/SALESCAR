@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SalesCar.Application.Dtos;
 using SalesCar.Application;
-using SalesCar.Domain;
 using SalesCar.Domain.Contextos;
 
 namespace SalesCar.API.Controllers
@@ -30,9 +30,23 @@ namespace SalesCar.API.Controllers
             {
                 var carros = await _carroService.GetAllCarrosAsync();
 
-                if (carros == null) return NotFound("Nenhum carro encontrado.");
+                if (carros == null) return NoContent();
 
-                return Ok(carros);
+                var carrosRetorno = new List<CarroDto>();
+
+                foreach (var carro in carros)
+                {
+                    carrosRetorno.Add(new CarroDto(){
+                        Id = carro.Id,
+                        Descricao = carro.Descricao,
+                        Cor = carro.Cor,
+                        AnoModelo = carro.AnoModelo,
+                        AnoFabricacao = carro.AnoFabricacao,
+                        Marca = carro.Marca
+                    });
+                }
+
+                return Ok(carrosRetorno);
             }
             catch (Exception ex)
             {
@@ -48,7 +62,7 @@ namespace SalesCar.API.Controllers
             {
                 var carros = await _carroService.GetCarrosByIdAsync(id);
 
-                if (carros == null) return NotFound("Nenhum carro encontrado pelo id informado.");
+                if (carros == null) return NoContent();
 
                 return Ok(carros);
             }
@@ -65,7 +79,7 @@ namespace SalesCar.API.Controllers
             {
                 var carros = await _carroService.GetAllCarrosByDescricaoAsync(descricao);
 
-                if (carros == null) return NotFound("Nenhum carro encontrado pela descrição informada.");
+                if (carros == null) return NoContent();
 
                 return Ok(carros);
             }
@@ -77,13 +91,13 @@ namespace SalesCar.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Carro model) 
+        public async Task<IActionResult> Post(CarroDto model) 
         {
            try
             {
                 var carros = await _carroService.AddCarro(model);
 
-                if (carros == null) return BadRequest("Erro ao tentar adicionar carro.");
+                if (carros == null) return NoContent();
 
                 return Ok(carros);
             }
@@ -94,13 +108,13 @@ namespace SalesCar.API.Controllers
             } 
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Carro model) 
+        public async Task<IActionResult> Put(int id, CarroDto model) 
         {
            try
             {
                 var carros = await _carroService.UpdateCarro(id, model);
 
-                if (carros == null) return BadRequest("Erro ao tentar adicionar carro.");
+                if (carros == null) return NoContent();
 
                 return Ok(carros);
             }
@@ -111,7 +125,7 @@ namespace SalesCar.API.Controllers
             } 
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id, Carro model) 
+        public async Task<IActionResult> Delete(int id, CarroDto model) 
         {
            try
             {
