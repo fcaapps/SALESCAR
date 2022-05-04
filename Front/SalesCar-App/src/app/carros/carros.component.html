@@ -1,10 +1,43 @@
 <h1>Carros</h1>
 <hr>
-<div *ngFor="let carro of carros">
-  <p>Descrição: {{carro.descricao}}</p>
-  <p>Cor: {{carro.cor}}</p>
-  <p>Ano de Fabricação: {{carro.anoFabricacao}}</p>
-  <p>Ano Modelo: {{carro.anoModelo}}</p>
-  <hr>
-</div>
 
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label for="inputPassword6" class="col-form-label">Filtro:</label>
+  </div>
+  <div class="col-auto">
+    <input
+    type="text"
+    class="form-control mr-2"
+    placeholder="buscar"
+    [(ngModel)]="filtroLista"
+    >
+  </div>
+</div>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>Descrição</th>
+      <th>Cor</th>
+      <th>Ano Fabricação</th>
+      <th>Ano Modelo</th>
+      <th>Marca</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let carro of carrosFiltrados">
+      <td></td>
+      <td>{{carro.descricao}}</td>
+      <td>{{carro.cor}}</td>
+      <td>{{carro.anoFabricacao}}</td>
+      <td>{{carro.anoModelo}}</td>
+      <td>{{carro.marca}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
