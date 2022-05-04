@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { CarroService } from 'src/services/carro.service';
 
 @Component({
   selector: 'app-carros',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./carros.component.scss']
 })
 export class CarrosComponent implements OnInit {
+  modalRef?: BsModalRef;
 
   public carros: any = [];
 
@@ -31,20 +33,37 @@ export class CarrosComponent implements OnInit {
     )
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private carroService: CarroService,
+              private modalService: BsModalService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getCarros();
   }
 
   public getCarros(): void {
-    this.http.get('https://localhost:5001/api/Carros').subscribe(
+    this.carroService.getCarros().subscribe(
       response => {
         this.carros = response,
         this.carrosFiltrados = this.carros
       },
       error => console.log(error)
     );
+  }
+
+
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.modalRef?.hide();
+    this.toastr.success('O Carro foi excluído com sucesso!', 'Excluído');
+  }
+
+  decline(): void {
+    this.modalRef?.hide();
   }
 
 }

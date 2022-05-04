@@ -35,9 +35,18 @@
       <td>{{carro.marca}}</td>
       <td>
         <button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">Editar</button>
-        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="openModal(template)">Excluir</button>
       </td>
     </tr>
   </tbody>
 
 </table>
+
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Confirma exclusão do carro?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>

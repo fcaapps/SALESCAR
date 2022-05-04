@@ -10,12 +10,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
+import { CarroService } from 'src/services/carro.service';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+import { ToastrModule } from 'ngx-toastr';
+import { ComprasComponent } from './compras/compras.component';
+import { VendasComponent } from './vendas/vendas.component';
 
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     CarrosComponent,
-      NavComponent
+    NavComponent,
+      ComprasComponent,
+      VendasComponent
    ],
   imports: [
     BrowserModule,
@@ -23,9 +32,16 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true
+    })
   ],
-  providers: [],
+  providers: [CarroService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
