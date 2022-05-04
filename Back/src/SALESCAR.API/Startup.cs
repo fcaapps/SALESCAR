@@ -6,13 +6,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SalesCar.Application;
+using SalesCar.Domain;
+using SalesCar.Domain.Contextos;
+using SalesCar.Persistence;
+using SalesCar.Persistence.Contratos;
 
-namespace SALESCAR.API
+namespace SalesCar.API
 {
     public class Startup
     {
@@ -27,10 +33,18 @@ namespace SALESCAR.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<SalesCarContext>(
+                context => context.UseSqlServer(Configuration.GetConnectionString("Default"))	
+            );   
             services.AddControllers();
+
+            services.AddScoped<ICarroService, CarroService>();
+            services.AddScoped<IGeralPersist, SalesCarGeralPersistence>();
+            services.AddScoped<ICarroPersist, SalesCarCarroPersistence>();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SALESCAR.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SalesCar.API", Version = "v1" });
             });
         }
 
