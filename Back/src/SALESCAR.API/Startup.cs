@@ -39,6 +39,8 @@ namespace SalesCar.API
             );   
             services.AddControllers();
 
+            services.AddCors(); 
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICarroService, CarroService>();
@@ -66,6 +68,10 @@ namespace SalesCar.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(x => x.AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
