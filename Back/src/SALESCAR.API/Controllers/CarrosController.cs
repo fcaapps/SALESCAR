@@ -124,20 +124,25 @@ namespace SalesCar.API.Controllers
                     $"Erro ao tentar atualizar carros. Erro: {ex.Message}");                
             } 
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id, CarroDto model) 
+
+[HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-           try
+            try
             {
+                var evento = await _carroService.GetCarrosByIdAsync(id);
+                if (evento == null) return NoContent();
+
                 return await _carroService.DeleteCarro(id) ? 
-                       Ok("Deletado") : 
+                       Ok(new { message = "Deletado"}) : 
                        BadRequest("Evento não deletado");
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar deletar carros. Erro: {ex.Message}");                
-            } 
+                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
+            }
         }
+
     }
 }

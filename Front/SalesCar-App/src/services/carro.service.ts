@@ -25,20 +25,18 @@ export class CarroService {
       .get<Carro[]>(`${this.baseURL}/${descricao}/descricao`)
   }
 
-  // public post(Carro: Carro): Observable<Carro> {
-  //   return this.http
-  //     .post<Carro>(this.baseURL, Carro)
-  // }
+  public postCarro(carro: Carro): Observable<Carro> {
+    return this.http
+      .post<Carro>(this.baseURL, carro)
+  }
 
-  // public put(Carro: Carro): Observable<Carro> {
-  //   return this.http
-  //     .put<Carro>(`${this.baseURL}/${Carro.id}`, Carro)
-  // }
+  public putCarro(id: number, carro: Carro): Observable<Carro> {
+    return this.http
+      .put<Carro>(`${this.baseURL}/${id}`, carro)
+  }
 
-  // public deleteCarro(id: number): Observable<any> {
-  //   return this.http
-  //     .delete(`${this.baseURL}/${id}`)
-  //     .pipe(take(1));
-  // }
+  public deleteCarros(id: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
 
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarroService } from 'src/services/carro.service';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -24,6 +24,8 @@ import { ComprasComponent } from './components/compras/compras.component';
 import { RelatoriohtmlComponent } from './components/relatorios/relatoriohtml/relatoriohtml.component';
 import { RelatoriopdfComponent } from './components/relatorios/relatoriopdf/relatoriopdf.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -48,15 +50,18 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true
-    })
+    }),
+    NgxSpinnerModule
   ],
   providers: [CarroService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

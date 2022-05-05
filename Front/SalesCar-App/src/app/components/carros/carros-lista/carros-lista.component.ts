@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 import { CarroService } from 'src/services/carro.service';
 
 @Component({
@@ -18,6 +19,8 @@ export class CarrosListaComponent implements OnInit {
   public carrosFiltrados: any = [];
 
   private _filtroLista: string = '';
+  public carroId = 0;
+  public carroDescricao = '';
 
   public get filtroLista(): string {
     return this._filtroLista;
@@ -37,11 +40,20 @@ export class CarrosListaComponent implements OnInit {
 
   constructor(private carroService: CarroService,
               private modalService: BsModalService,
+              private spinner: NgxSpinnerService,
               private toastr: ToastrService,
               private router: Router) { }
 
   ngOnInit() {
     this.getCarros();
+
+    /** spinner starts on init */
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000);
   }
 
   public getCarros(): void {
@@ -54,15 +66,38 @@ export class CarrosListaComponent implements OnInit {
     );
   }
 
-
-
-  openModal(template: TemplateRef<any>) {
+  openModal(event: any, template: TemplateRef<any>, carroId: number, carroDescricao: string) {
+    event.stopPropagation();
+    this.carroId = carroId;
+    this.carroDescricao = carroDescricao;
+    console.log(carroId + ' - ' + carroDescricao);
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirm(): void {
     this.modalRef?.hide();
-    this.toastr.success('O Carro foi excluído com sucesso!', 'Excluído');
+    this.spinner.show();
+    this.carroService.deleteCarros(this.carroId).subscribe(
+      (result: string) => {
+        console.log(result);
+        this.toastr.success(
+          'O Carro foi deletado com Sucesso.',
+          'Deletado!'
+        );
+        this.spinner.hide();
+        this.getCarros();
+      },
+      (error: any) => {
+        console.error(error);
+        this.toastr.error(
+          `Erro ao tentar deletar o carro ${this.carroId}`,
+          'Erro'
+        );
+        this.spinner.hide();
+      },
+      () => this.spinner.hide()
+    );
+    //this.toastr.success('O Carro foi excluído com sucesso!', 'Excluído');
   }
 
   decline(): void {
