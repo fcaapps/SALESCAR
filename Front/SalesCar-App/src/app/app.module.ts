@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CarrosComponent } from './carros/carros.component';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -15,16 +15,31 @@ import { CarroService } from 'src/services/carro.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ToastrModule } from 'ngx-toastr';
-import { ComprasComponent } from './compras/compras.component';
-import { VendasComponent } from './vendas/vendas.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
+import { CarrosComponent } from './components/carros/carros.component';
+import { CarrosDetalheComponent } from './components/carros/carros-detalhe/carros-detalhe.component';
+import { CarrosListaComponent } from './components/carros/carros-lista/carros-lista.component';
+import { VendasComponent } from './components/vendas/vendas.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { RelatoriohtmlComponent } from './components/relatorios/relatoriohtml/relatoriohtml.component';
+import { RelatoriopdfComponent } from './components/relatorios/relatoriopdf/relatoriopdf.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     CarrosComponent,
     NavComponent,
-      ComprasComponent,
-      VendasComponent
+    TituloComponent,
+    CarrosDetalheComponent,
+    CarrosListaComponent,
+    VendasComponent,
+    ComprasComponent,
+    RelatoriohtmlComponent,
+    RelatoriopdfComponent,
+    DashboardComponent
    ],
   imports: [
     BrowserModule,
