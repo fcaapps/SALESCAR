@@ -9,6 +9,8 @@ namespace SalesCar.Application.Helpers
         public SalesCarProfile()
         {
             CreateMap<Carro, CarroDto>().ReverseMap();
+            CreateMap<PedidoCompra, PedidoCompraDto>().ReverseMap();
+            CreateMap<PedidoVenda, PedidoVenda>().ReverseMap();
         }
     }
 }

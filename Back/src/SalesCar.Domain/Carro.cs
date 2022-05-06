@@ -8,7 +8,11 @@ namespace SalesCar.Domain
         public string AnoModelo { get; set; }
         public string AnoFabricacao { get; set; }
         public string Marca { get; set; }
-        public string Empresa { get; set; }        
+        public string Empresa { get; set; } 
+        public double Preco { get; set; }   
+        public string Modelo { get; set; }
+        public double MargemIdeal { get; set; }
+        public double MargemMinima { get; set; }
         
     }
 }

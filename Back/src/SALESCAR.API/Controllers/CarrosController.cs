@@ -125,7 +125,7 @@ namespace SalesCar.API.Controllers
             } 
         }
 
-[HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

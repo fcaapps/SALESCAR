@@ -13,5 +13,8 @@ namespace SalesCar.Application.Dtos
         public string AnoFabricacao { get; set; }
         public string Marca { get; set; }   
         public string Empresa { get; set; }
+        public string Modelo { get; set; }
+        public double MargemIdeal { get; set; }
+        public double MargemMinima { get; set; }
     }
 }

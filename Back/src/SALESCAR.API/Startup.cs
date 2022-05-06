@@ -44,6 +44,7 @@ namespace SalesCar.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICarroService, CarroService>();
+            services.AddScoped<IPedidoCompraPersist, PedidoCompraPersist>();
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<ICarroPersist, CarroPersist>();
 
